@@ -100,6 +100,15 @@ def list_fields(shp_file):
                                                 ftype_desc_tab[ftype],
                                                 flen))
 
+@shp_util.command()
+@click.argument('shp_file', type=click.Path(dir_okay=False))
+def info(shp_file):
+  """
+  Prints metadata about the shp_file.
+  """
+  with shapefile.Reader(shp_file) as sf:
+    print('Shape type:', sf.shapeTypeName)
+    print('Number of records:', len(sf))
 
 if __name__ == '__main__':
   import sys
